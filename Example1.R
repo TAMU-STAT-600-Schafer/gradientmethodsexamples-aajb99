@@ -48,16 +48,21 @@ out_small <- SteepestDescent(f, fprime, x0 = 0, alpha = alpha, nIter = nIter)
 
 plot(0:nIter, out_small$xvec, type = 'o', xlab = "Iteration t", ylab = "Value of xt")
 
+# Objective function
 plot(0:nIter, out_small$fvec, type = 'o', xlab = "Iteration t", ylab = "Value of f(xt)")
+
 
 # Medium step size
 alpha = 0.01
 
 out_medium <- SteepestDescent(f, fprime, x0 = 0, alpha = alpha, nIter = nIter)
 
+# Steps to optimized estimation/minimum of gradient
 plot(0:nIter, out_medium$xvec, type = 'o', xlab = "Iteration t", ylab = "Value of xt")
 
+# Objective function
 plot(0:nIter, out_medium$fvec, type = 'o', xlab = "Iteration t", ylab = "Value of f(xt)")
+
 
 # Large step size
 alpha = 0.03
@@ -72,6 +77,9 @@ plot(0:nIter, out_large$fvec, type = 'o', xlab = "Iteration t", ylab = "Value of
 # Use Newton method
 ########################################################
 
+# Step size (alpha in steepest descent) is hetian (i.e. 2nd derivative) of f (like 2nd order gradient)
+# NOTE: using 2nd derivatives leads to faster convergence typically (may lead to oscillation risks in steps)
+
 # Source Newton's method functions
 source("NewtonsMethod.R")
 
@@ -79,8 +87,12 @@ nIter = 30
 
 # Starting point x0 = 5
 out_Newton1 <- NewtonsMethod(f, fprime, fdoubleprime, x0 = 5, nIter = nIter)
+# plot value of var xt:
 plot(0:nIter, out_Newton1$xvec, type = 'o', xlab = "Iteration t", ylab = "Value of xt")
+# plot objective function:
 plot(0:nIter, out_Newton1$fvec, type = 'o', xlab = "Iteration t", ylab = "Value of f(xt)")
+
+# (spikes: from oscillating steps)
 
 # Starting point x0 = 8
 out_Newton2 <- NewtonsMethod(f, fprime, fdoubleprime, x0 = 8, nIter = nIter)
